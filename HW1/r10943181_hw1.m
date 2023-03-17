@@ -120,30 +120,14 @@ while (E1-E0>delta || E1-E0<0)
     end
     P
 
-    
-    while(size(P,2)~=k+2)
-        err_bou =[];
-        bou = [0, 0.5, W_high, W_low];
-        err_0=100;
-        err_05=100;
-        err_tr_high=100;
-        err_tr_low=100;
-        if(find(P==0))
-            err_bou(1) = err(1);
+    if(size(P,2)==k+4)
+        P = P(2:k+3);
+    elseif(size(P,2)==k+3)
+        if(abs(err(1))>abs(err(size(F,2))))
+            P = P(1:k+2);
+        else
+            P = P(2:k+3);
         end
-        if(find(P==0.5))
-            err_bou(2) = err(size(F,2));
-        end
-        if(find(P==W_high))
-            err_bou(3) = err(find(F==W_high));
-        end
-        if(find(P==W_low))
-            err_bou(4) = err(find(F==W_low));
-        end
-        err_bou
-        [temp, index] = min(abs(err_bou))
-        temp2 = find(P==bou(index))
-        P(temp2)=[]
     end
     
     % step 5
