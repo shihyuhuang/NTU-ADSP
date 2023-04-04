@@ -19,8 +19,8 @@ for i=1:N
     end
 end
 H = Hd;
-%H(k+1) = Hd(k+1)*0.7; % for transition band
-%H(k+2) = Hd(k+2)*0.3; % for transition band
+H(k+1) = Hd(k+1)*0.7; % for transition band
+H(k+2) = Hd(k+2)*0.7; % for transition band
 
 % step 2
 r1 = ifft(H);
