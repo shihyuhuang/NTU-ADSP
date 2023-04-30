@@ -1,7 +1,7 @@
 clear;
 clc;
 
-I = imread('cat.jpeg');
+I = imread('firework.jpeg');
 img = im2double(I);
 
 figure(1)
@@ -89,6 +89,3 @@ figure(2);
 image(img_af);
 title('reconstruct');
 
-MAX=1;
-MES=sum(sum(sum((img-img_af).^2)))/(size(img,1)*size(img,2)*3);    %均方差
-PSNR=20*log10(MAX/sqrt(MES)) 
