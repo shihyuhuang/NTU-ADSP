@@ -1,7 +1,7 @@
 clear;
 clc;
 
-I = imread('firework.jpeg');
+I = imread('cat.jpeg');
 img = im2double(I);
 
 figure(1)
@@ -32,15 +32,25 @@ Y_re = Y_com;
 Cb_re_temp = [];
 Cr_re_temp = [];
 for i=1:size(Cb_com,1)
-    Cb_re_temp = [Cb_re_temp;Cb_com(i,:);ones(1,size(Cb_com,2))];
-    Cr_re_temp = [Cr_re_temp;Cr_com(i,:);ones(1,size(Cr_com,2))];
+    Cb_re_temp = [Cb_re_temp;Cb_com(i,:);ones(1,ceil(size(Cb,2)/2))];
+    Cr_re_temp = [Cr_re_temp;Cr_com(i,:);ones(1,ceil(size(Cr,2)/2))];
+end
+
+if mod(size(Cb,1),2)==1 % odd
+    Cb_re_temp = Cb_re_temp(1:end-1,:);
+    Cr_re_temp = Cr_re_temp(1:end-1,:);
 end
 
 Cb_re = [];
 Cr_re = [];
 for i=1:size(Cb_com,2)
-    Cb_re = [Cb_re,Cb_re_temp(:,i),ones(2*size(Cb_com,1),1)];
-    Cr_re = [Cr_re,Cr_re_temp(:,i),ones(2*size(Cr_com,1),1)];
+    Cb_re = [Cb_re,Cb_re_temp(:,i),ones(size(Cb,1),1)];
+    Cr_re = [Cr_re,Cr_re_temp(:,i),ones(size(Cr,1),1)];
+end
+
+if mod(size(Cb,2),2)==1 % odd
+    Cb_re = Cb_re(:,1:end-1);
+    Cr_re = Cr_re(:,1:end-1);
 end
 
 % 2
